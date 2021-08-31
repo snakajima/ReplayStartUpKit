@@ -8,9 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var angle = Double(0.0)
+    private let timer = Timer.publish(every: 1.0, on: .main, in: .default).autoconnect()
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ZStack {
+            Rectangle()
+                .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: 100)
+                .foregroundColor(.blue)
+                .rotationEffect(Angle(radians: angle))
+                .animation(.easeInOut)
+        }.onReceive(timer) { _ in
+            angle += .pi/4
+        }
     }
 }
 
