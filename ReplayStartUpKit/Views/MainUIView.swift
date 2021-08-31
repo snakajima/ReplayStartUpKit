@@ -22,6 +22,12 @@ struct MainUIView: View {
             }
             .padding(10)
         }
+        .sheet(item: $state.activePopup) { item in
+            switch(item) {
+            case .broadCast:
+                BroadcastActivityController(controller: state.bavController!)
+            }
+        }
     }
 }
 
