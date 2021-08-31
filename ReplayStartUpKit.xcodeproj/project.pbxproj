@@ -31,6 +31,7 @@
 		74CA316F26DEE4620075B359 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		74CA317226DEE5B40075B359 /* BroadcastActivityController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BroadcastActivityController.swift; sourceTree = "<group>"; };
 		74CA317426DEF08E0075B359 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		74CA317526DEF39F0075B359 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +49,7 @@
 			isa = PBXGroup;
 			children = (
 				74CA317426DEF08E0075B359 /* README.md */,
+				74CA317526DEF39F0075B359 /* LICENSE.md */,
 				74CA315726DEE4300075B359 /* ReplayStartUpKit */,
 				74CA315626DEE4300075B359 /* Products */,
 			);
