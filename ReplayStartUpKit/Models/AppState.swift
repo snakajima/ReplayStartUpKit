@@ -30,6 +30,10 @@ class AppState: NSObject, ObservableObject {
            broadCastController.isBroadcasting {
             broadCastController.finishBroadcast { error in
                 print("finishBroadcast", error ?? "success")
+                DispatchQueue.main.async {
+                    self.broadCastController?.delegate = nil
+                    self.broadCastController = nil
+                }
             }
             return
         }
@@ -38,7 +42,7 @@ class AppState: NSObject, ObservableObject {
         recorder.isMicrophoneEnabled = true
         
         RPBroadcastActivityViewController.load { controller, error in
-            print("###", controller ?? "no controller", error ?? "success")
+            print("RPBroadcastActivityViewController.load", error ?? "success")
             if let controller = controller {
                 self.bavController = controller
                 controller.delegate = self
@@ -50,7 +54,6 @@ class AppState: NSObject, ObservableObject {
 
 extension AppState: RPBroadcastActivityViewControllerDelegate {
     func broadcastActivityViewController(_ broadcastActivityViewController: RPBroadcastActivityViewController, didFinishWith broadcastController: RPBroadcastController?, error: Error?) {
-        print("###", error ?? "success")
         DispatchQueue.main.async {
             self.bavController?.delegate = nil
             self.bavController = nil
@@ -64,7 +67,7 @@ extension AppState: RPBroadcastActivityViewControllerDelegate {
                 print("startBroadcast failed", error)
                 return
             }
-            print("startBroadcast started", broadcastController.broadcastURL)
+            print("startBroadcast succeeded", broadcastController.broadcastURL)
             broadcastController.delegate = self
             self.broadCastController = broadcastController
         }
@@ -74,19 +77,19 @@ extension AppState: RPBroadcastActivityViewControllerDelegate {
 extension AppState : RPBroadcastControllerDelegate {
     func broadcastController(_ broadcastController: RPBroadcastController, didFinishWithError error: Error?) {
         if let error = error {
-            print("didFinishWithError", error.localizedDescription)
+            print("broadcastController:didFinishWithError", error.localizedDescription)
         } else {
-            print("didFinish")
+            print("broadcastController:didFinish")
         }
         self.broadCastController?.delegate = nil
         self.broadCastController = nil
     }
     
     func broadcastController(_ broadcastController: RPBroadcastController, didUpdateBroadcast broadcastURL: URL) {
-        print("didUpdateBroadcast", broadcastURL)
+        print("broadcastController:didUpdateBroadcast", broadcastURL)
     }
     
     func broadcastController(_ broadcastController: RPBroadcastController, didUpdateServiceInfo serviceInfo: [String : NSCoding & NSObjectProtocol]) {
-        print("didUpdateServiceInfo", serviceInfo)
+        print("broadcastController:didUpdateServiceInfo", serviceInfo)
     }
 }

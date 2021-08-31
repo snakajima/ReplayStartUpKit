@@ -15,17 +15,12 @@ struct BroadcastActivityController: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: RPBroadcastActivityViewController, context: Context) {
+        // Hack to work around iPad issue
         if UIDevice.current.userInterfaceIdiom == .pad {
-            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate else {
-                print("no sceneDelegate")
-                return
-            }
-            guard let vc = sceneDelegate.uiWindow?.rootViewController else {
-                print("no rootVC")
-                return
-            }
-            guard let view = vc.view else {
-                print("no view")
+            guard let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
+                  let vc = sceneDelegate.uiWindow?.rootViewController,
+                  let view = vc.view else {
+                print("somethign is really wrong")
                 return
             }
             controller.modalPresentationStyle = .popover
